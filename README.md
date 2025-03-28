@@ -10,7 +10,6 @@ Understanding **CSS specificity** is essential for writing clean, maintainable, 
 
 The specificity is calculated as:
 
-
 - **ID selectors** (e.g., `#header`) → `1-0-0`
 - **Class, attribute, pseudo-class** (e.g., `.btn`, `[type="text"]`, `:hover`) → `0-1-0`
 - **Type & pseudo-elements** (e.g., `div`, `h1`, `::before`) → `0-0-1`
@@ -42,57 +41,68 @@ p,
 :is(p) {
   color: blue;
 }
+```
 
-🚨 !important & Inline Styles
-Rule	Priority
-Inline styles	Highest (unless overridden by !important)
-!important	Overrides all other declarations in the same origin/layer
-Avoid using !important unless absolutely necessary.
+---
 
-💡 Best Practices
+## 🚨 !important & Inline Styles
+
+| Rule           | Priority                                   |
+|----------------|--------------------------------------------|
+| Inline styles  | Highest (unless overridden by `!important`) |
+| `!important`   | Overrides all other declarations            |
+
+> Avoid using `!important` unless absolutely necessary.
+
+---
+
+## 💡 Best Practices
+
 ✅ Use low-specificity selectors:
 
-css
-Copy
-Edit
+```css
 :where(.btn) {
   color: blue;
 }
+```
+
 ✅ Use cascade layers:
 
-css
-Copy
-Edit
+```css
 @layer theme {
   button {
     background: white;
   }
 }
+```
+
 ❌ Avoid over-specific selectors:
 
-css
-Copy
-Edit
+```css
 html body div.container ul li a span {
   color: red;
 }
-🧰 Tips for Managing Specificity
-Use attribute selectors ([id="something"]) instead of #something to lower specificity.
+```
 
-Use :where() to zero out specificity.
+---
 
-Repeat class or ID selectors only when needed to increase specificity:
+## 🧰 Tips for Managing Specificity
 
-css
-Copy
-Edit
+- Use attribute selectors (`[id="something"]`) instead of `#something` to lower specificity.
+- Use `:where()` to zero out specificity.
+- Repeat class or ID selectors **only when needed** to increase specificity:
+
+```css
 .btn.btn.btn {
   color: red; /* 0-3-0 */
 }
-🔄 Specificity Examples
-css
-Copy
-Edit
+```
+
+---
+
+## 🔄 Specificity Examples
+
+```css
 /* 1-1-1 */
 #myElement input.myClass {
   color: red;
@@ -107,25 +117,35 @@ input[type="password"]:required {
 html body main input {
   color: green;
 }
-Result: Red wins — highest specificity (1-1-1)
+```
 
-📦 Overriding Third-party CSS
+**Result:** Red wins — highest specificity (`1-1-1`)
+
+---
+
+## 📦 Overriding Third-party CSS
+
 If you're using CSS from a library (like Bootstrap or Tailwind), consider:
 
-Importing it into a cascade layer:
+1. Importing it into a cascade layer:
 
-css
-Copy
-Edit
+```css
 @import "thirdparty.css" layer(thirdparty);
-Writing overrides outside the layer or in a later layer.
+```
 
-🧪 Test It Out
+2. Writing overrides outside the layer or in a later layer.
+
+---
+
+## 🧪 Test It Out
+
 Use tools like:
 
-Specificity Calculator
+- [Specificity Calculator](https://specificity.keegan.st)
+- [CSS Cascade Visualizer](https://csscascade.dev)
 
-CSS Cascade Visualizer
+---
 
-📝 License
+## 📝 License
+
 MIT License. Feel free to use and contribute.
