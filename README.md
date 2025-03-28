@@ -1,4 +1,4 @@
-# 🎯 CSS Specificity Guide
+# 🎯 CSS Specificity
 
 Understanding **CSS specificity** is essential for writing clean, maintainable, and predictable styles. This guide breaks down how specificity works and how to manage it effectively.
 
